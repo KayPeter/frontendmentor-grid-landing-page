@@ -1,3 +1,6 @@
+/* NOTE: This is a mobile first design.
+The desktop styles are indicated with a media query*/
+
 :root {
   --white: hsl(0, 0%, 100%);
   --blue-200: hsl(224, 100%, 95%);
@@ -21,7 +24,9 @@
   --fs-h1: clamp(2.5rem, 1.6rem + 3.6vw, 4rem);
   --fw-regular: 400;
   --fw-medium: 500;
-  --line-height: 1.5;
+  --line-height-sm: 1.05;
+  --line-height-lg: 1.5;
+  --line-height-xlg: 1.65;
 
   --bar-height: 4.5rem; /* 72px header/footer */
   --gutter: 1.5rem; /* 24px mobile */
@@ -55,7 +60,7 @@ body {
   font-family: var(--font);
   font-size: var(--fs-small);
   font-weight: var(--fw-regular);
-  line-height: var(--line-height);
+  line-height: var(--line-height-lg);
 }
 
 h1,
@@ -107,6 +112,7 @@ a {
 .menu-button {
   background: none;
   border: none;
+  padding: 0;
   color: var(--white);
   width: 2.75rem;
   height: 2.75rem;
@@ -116,6 +122,44 @@ a {
 .menu-button:hover,
 .menu-button:focus {
   background: var(--overlay-light);
+}
+
+/* HERO */
+.hero {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.intro {
+  padding: 3rem var(--gutter);
+}
+
+.intro h1 {
+  max-width: 11ch; /* Sets the maximum line length to 11 "0" characters, so that the text wraps when I want it to */
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--line-height-sm);
+  letter-spacing: -0.025em;
+}
+
+.intro p {
+  max-width: 24rem;
+  margin-top: 1.5rem;
+  font-size: var(--fs-body);
+  line-height: var(--line-height-xlg);
+  color: var(--text-muted);
+}
+
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.stat {
+  position: relative;
+  display: flex;
 }
 
 /* FOOTER */
@@ -132,6 +176,20 @@ a {
 
 /* DESKTOP STYLES */
 @media (min-width: 64rem) {
+  .hero {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .site-footer {
     flex-direction: row;
     justify-content: space-between;
