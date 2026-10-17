@@ -25,6 +25,7 @@ The desktop styles are indicated with a media query*/
   --fw-regular: 400;
   --fw-medium: 500;
   --line-height-sm: 1.05;
+  --line-height-md: 1.4;
   --line-height-lg: 1.5;
   --line-height-xlg: 1.65;
 
@@ -120,7 +121,7 @@ a {
 }
 
 .menu-button:hover,
-.menu-button:focus {
+.menu-button:active {
   background: var(--overlay-light);
 }
 
@@ -158,8 +159,37 @@ a {
 }
 
 .stat {
-  position: relative;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: var(--stat-min);
+  padding: var(--stat-pad);
+  border-top: 1px solid var(--line);
+}
+
+.stat__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat__value {
+  font-size: var(--fs-stat);
+  font-weight: var(--fw-regular);
+  line-height: 1.2;
+  letter-spacing: -0.05rem;
+}
+
+.stat__text h2 {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--line-height-md);
+}
+
+.stat__text p {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-regular);
+  color: var(--text-muted);
 }
 
 /* FOOTER */
@@ -177,7 +207,7 @@ a {
 /* DESKTOP STYLES */
 @media (min-width: 64rem) {
   .hero {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 45fr 55fr;
   }
 
   .intro {
@@ -188,6 +218,20 @@ a {
 
   .stats {
     grid-template-columns: repeat(2, 1fr);
+    border-left: 1px solid var(--line);
+    grid-auto-rows: 1fr; /* This ensures uniform row heights. The height of the row is no longer determined by its content */
+  }
+
+  .stat {
+    border-top: 0;
+  }
+
+  .stat:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+
+  .stat:nth-child(even) {
+    border-left: 1px solid var(--line);
   }
 
   .site-footer {
