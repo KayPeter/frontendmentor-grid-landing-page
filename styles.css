@@ -44,11 +44,22 @@ The desktop styles are indicated with a media query*/
   }
 }
 
-/* ---------- BASE STYLES ---------- */
+/* BASE STYLES  */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  min-width: 100dvw;
+  min-height: calc(100dvh - var(--bar-height)); /* Adjust for header height */
+  background-color: var(--overlay);
+  z-index: 1; /* Ensure the overlay is above other content */
 }
 
 body {
@@ -63,6 +74,13 @@ body {
   font-size: var(--fs-small);
   font-weight: var(--fw-regular);
   line-height: var(--line-height-lg);
+}
+
+body:has(.menu:popover-open) {
+  overflow: hidden; /* Prevents scrolling when the menu is open */
+  #overlay {
+    display: block;
+  }
 }
 
 h1,
@@ -93,6 +111,19 @@ a {
   border-bottom: 1px solid var(--line);
 }
 
+.menu-icon-close {
+  display: none;
+}
+
+.site-header:has(.menu:popover-open) {
+  .menu-icon {
+    display: none;
+  }
+  .menu-icon-close {
+    display: block;
+  }
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -112,6 +143,9 @@ a {
 }
 
 .menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   padding: 0;
@@ -124,6 +158,32 @@ a {
 .menu-button:hover,
 .menu-button:active {
   background: var(--overlay-light);
+}
+
+/* I might not need :popopen state, because this element is only visible when :popopen is TRUE */
+.menu {
+  position: absolute;
+  margin: 0;
+  top: var(--bar-height);
+  right: 0;
+  left: auto;
+  bottom: auto;
+  min-width: 100dvw;
+  /* The height has to be different for mobile and desktop */
+  min-height: var(--stat-min);
+  font-size: var(--fs-stat);
+  color: var(--white);
+  background-color: var(--bg-raised);
+  border: none;
+  padding-block: var(--stat-pad);
+  text-align: center;
+  z-index: 2;
+}
+
+.menu a:hover,
+.menu a:active,
+.menu a:focus {
+  text-decoration: underline;
 }
 
 /* HERO */
@@ -216,6 +276,13 @@ a {
     grid-template-columns: 45fr 55fr;
   }
 
+  .menu {
+    min-width: 27.5%;
+    min-height: 100dvh;
+    text-align: right;
+    padding-right: var(--gutter);
+  }
+
   .intro {
     display: flex;
     flex-direction: column;
@@ -254,4 +321,12 @@ a {
 }
 .attribution a {
   color: hsl(228, 45%, 44%);
+}
+
+/* NO ANIMATION */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
