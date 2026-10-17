@@ -5,6 +5,7 @@ The desktop styles are indicated with a media query*/
   --white: hsl(0, 0%, 100%);
   --blue-200: hsl(224, 100%, 95%);
   --blue-400: hsl(220, 100%, 64%);
+  --blue-500: hsl(228, 100%, 64%);
   --blue-600: hsl(228, 100%, 60%);
   --blue-700: hsl(228, 99%, 58%);
   --black: hsl(0, 0%, 0%);
@@ -165,6 +166,11 @@ a {
   min-height: var(--stat-min);
   padding: var(--stat-pad);
   border-top: 1px solid var(--line);
+}
+
+.stat:hover {
+  background: var(--blue-500);
+  cursor: pointer;
 }
 
 .stat__header {
