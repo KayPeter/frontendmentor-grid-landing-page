@@ -8,7 +8,6 @@ The desktop styles are indicated with a media query*/
   --blue-500: hsl(228, 100%, 64%);
   --blue-600: hsl(228, 100%, 60%);
   --blue-700: hsl(228, 99%, 58%);
-  --black: hsl(0, 0%, 0%);
   --overlay: hsl(0 0% 0% / 0.25);
   --overlay-light: hsl(0 0% 0% / 0.1);
 
@@ -60,6 +59,10 @@ The desktop styles are indicated with a media query*/
   min-height: calc(100dvh - var(--bar-height)); /* Adjust for header height */
   background-color: var(--overlay);
   z-index: 1; /* Ensure the overlay is above other content */
+}
+
+html {
+  scrollbar-gutter: stable; /* Prevents layout shift when the scrollbar appears */
 }
 
 body {
